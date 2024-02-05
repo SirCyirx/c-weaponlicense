@@ -1,4 +1,4 @@
-# c-buylicense
+# C-Buylicense
 [Discord](https://discord.gg/YvThXdz59G)
 
 
@@ -13,7 +13,7 @@
 - Open Source
 
 # Installation
-1. Download From [github]
+1. Download From [github](https://github.com/SirCyirx/C-BuyLicense)
 2. Rename The Folder From c-buylicense-main to c-buylicense.
 3. Put The Folder In Your Resources Folder.
 4. use this path [qb]/qb-core/server/player.lua and put this line any where in between line 111 - 138
