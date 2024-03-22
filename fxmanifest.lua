@@ -1,8 +1,8 @@
-fx_version 'bodacious'
+fx_version 'cerulean'
 game 'gta5'
 author 'SirCyrix'
 description 'C-Buylicense'
-version '1.0.1'
+version '1.0.2'
 
 shared_scripts {
     '@ox_lib/init.lua',
@@ -10,7 +10,7 @@ shared_scripts {
 }
 
 client_scripts {
-'client/*.lua'
+    'client/*.lua'
 }
 
 server_scripts {
