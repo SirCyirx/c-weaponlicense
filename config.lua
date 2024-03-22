@@ -1,8 +1,12 @@
+QBCore = exports['qb-core']:GetCoreObject()
+
 Config = Config or {}
 
-Config.NotifyType = 'qb' -- [qb] or [Okok] or [ox] or [mythic]
-Config.Inventory = 'qb' -- [qb] or [lj] or [ox]
-Config.Target = 'qb' -- [qb] or [ox]
+Config.NotifyType = "ox" -- [qb] or [okok] or [ox] or [mythic] IF YOU HAVE A CUSTOM NOTIFY THEN PUT [custom] AND GO DOWN TO THE BOTTOM  OF CONFIG AND PUT YOUR OWN CODE
+Config.Inventory = "qb" -- [qb] or [lj] or [ox]
+Config.Target = "qb" -- [qb] or [ox]
+
+Config.MoneyType = "Bank" -- Cash or Bank If you have cash as an item this may not work
 
 Config.UseGrant = true -- If set true then people must be granted this before being able to buy a firearms license
 Config.GrantRank = 2 -- The police grade required to grant someone the ability to get a weapon license 
@@ -14,6 +18,7 @@ Config.LicenseBanRank = 2 -- The police grade required to ban someone from getti
 Config.LicenseUnBanRank = 2 -- The police grade required to unban someone from getting a weapon license
 Config.LicensePrice = 100000 -- amount = to dollars how much it will cost when buying a weapon license
 Config.LicenseitemPrice = 10000 -- amount = to dollars -- this is for buying the license item if you have lost it 
+Config.LicenseReceive = true -- If set true when you buy a weapon license you will get the weapon license item
 
 Config.SelfCheck = true -- If set true players can check with /weaponbanned and it will tell you if you are banned or not also you can do /weapongranted and it will tell you if you are granted to have weapon license or not
 
@@ -24,9 +29,9 @@ Config.WeaponLicenseItemName = "weaponlicense" -- the item name of your weapon l
 
 Config.PedSettings = {
     label = "Buy Weapon license",
+    labelitem = "Request Weapon license Card",
     icon = "fa-solid fa-cart-shopping",
-    label2 = "Request Weapon license Card",
-    icon2 = "fa-solid fa-cart-shopping",
+    iconitem = "fa-solid fa-cart-shopping",
     Model = `s_m_m_armoured_01`,
     Scenario = 'WORLD_HUMAN_STAND_IMPATIENT'
 }
@@ -49,7 +54,7 @@ Config.Stores = { -- Gun Store
     { x = -1118.2871, y = 2693.3999,   z = 18.5542,  h = 311.5433, blipname = "Ammunation license Manager", blipsprite = 110, blipcolor = 0, blipscale = 0.6 },
     { x = -665.9783,  y = -938.7447,   z = 21.8292,  h = 266.9340, blipname = "Ammunation license Manager", blipsprite = 110, blipcolor = 0, blipscale = 0.6 },
     { x = 846.1522,   y = -1030.1340,  z = 27.1949,  h = 92.5500,  blipname = "Ammunation license Manager", blipsprite = 110, blipcolor = 0, blipscale = 0.6 }
-    -- you can add more coords below
+    -- you can add more locations below
 }
 
 Config.Lang = {
@@ -80,3 +85,40 @@ Config.Lang = {
     ['you_are_not_granted'] = 'You are not granted to get a firearm license. Talk to an officer about being granted permission',
     ['rank_not_high'] = 'You are not a high enough rank to use this command'
 }
+    function Notificationcl(titletext, msgtext, type)
+        if Config.NotifyType == "qb" then
+            if type == 'inform' then
+                local info = 'primary'
+            QBCore.Functions.Notify(msgtext, info, 5000)
+            end
+        elseif Config.NotifyType == "ox" then
+            lib.notify({ title = titletext, description = msgtext, type = type })
+        elseif Config.NotifyType == "okok" then
+            if type == 'inform' then
+                local info = 'info'
+            exports['okokNotify']:Alert(titletext, msgtext, 5000, info)
+            end
+        elseif Config.NotifyType == "mythic" then
+            exports['mythic_notify']:DoHudText(type, msgtext, { ['background-color'] = '#ffffff', ['color'] = '#000000' })
+        elseif Config.NotifyType == "custom" then
+            end
+        end
+
+    function Notificationsv(src, titletext, msgtext, type)
+        if Config.NotifyType == "qb" then
+            if type == 'inform' then
+               local info = 'primary'
+            TriggerClientEvent('QBCore:Notify', src, msgtext, info)
+            end
+        elseif Config.NotifyType == "ox" then
+            TriggerClientEvent('ox_lib:notify', src, { title = titletext, description = msgtext, type = type })
+        elseif Config.NotifyType == "okok" then
+            if type == 'inform' then
+                local info = 'info'
+            TriggerClientEvent('okokNotify:Alert', src, titletext, msgtext, 5000, info)
+            end
+        elseif Config.NotifyType == "mythic" then
+            TriggerClientEvent('mythic_notify:client:SendAlert', src, { type = type, text = msgtext, style = { ['background-color'] = '#ffffff', ['color'] = '#000000' } })
+        elseif Config.NotifyType == "custom" then
+      end
+   end
