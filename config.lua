@@ -2,30 +2,38 @@ QBCore = exports['qb-core']:GetCoreObject()
 
 Config = Config or {}
 
-Config.NotifyType = "ox" -- [qb] or [okok] or [ox] or [mythic] IF YOU HAVE A CUSTOM NOTIFY THEN PUT [custom] AND GO DOWN TO THE BOTTOM  OF CONFIG AND PUT YOUR OWN CODE
-Config.Inventory = "qb" -- [qb] or [lj] or [ox]
-Config.Target = "qb" -- [qb] or [ox]
+Config.NotifyType = "ox" -- ["qb"] or ["okok"] or ["ox"] or ["mythic"] IF YOU HAVE A CUSTOM NOTIFY THEN PUT [custom] AND GO DOWN TO THE BOTTOM OF CONFIG AND PUT YOUR OWN CODE
+Config.Inventory = "qb" -- ["qb"] or ["lj"] or ["ox"]
+Config.Target = "qb" -- ["qb"] or ["ox"]
 
-Config.MoneyType = "Bank" -- Cash or Bank If you have cash as an item this may not work
+Config.MoneyType = "Bank" -- "Cash" or "Bank" If you have cash as an item this may not work
 
-Config.UseGrant = true -- If set true then people must be granted this before being able to buy a firearms license
-Config.GrantRank = 2 -- The police grade required to grant someone the ability to get a weapon license 
-Config.UnGrantRank = 2 -- The police grade required to ungrant someone the ability to get a weapon license 
+Config.GrantSettings = {
+    UseGrant = true, -- If set true then people must be granted this before being able to buy a firearms license
+    GrantRank = 2, -- The police grade required to grant someone the ability to get a weapon license 
+    UnGrantRank = 2 -- The police grade required to ungrant someone the ability to get a weapon license 
+}
 
-Config.RemoveLicense = true -- If set true when a player is banned from getting a firearm license if they have a firearm license still active it will then be removed
-Config.LicenseBan = true -- If set true players can be banned or unbanned from being able to get a weapon license
-Config.LicenseBanRank = 2 -- The police grade required to ban someone from getting a weapon license
-Config.LicenseUnBanRank = 2 -- The police grade required to unban someone from getting a weapon license
-Config.LicensePrice = 100000 -- amount = to dollars how much it will cost when buying a weapon license
-Config.LicenseitemPrice = 10000 -- amount = to dollars -- this is for buying the license item if you have lost it 
-Config.LicenseReceive = true -- If set true when you buy a weapon license you will get the weapon license item
+Config.LicenseSettings = {
+    RemoveLicense = true, -- If set true when a player is banned from getting a firearm license if they have a firearm license still active it will then be removed
+    LicenseBan = true, -- If set true players can be banned or unbanned from being able to get a weapon license
+    LicenseBanRank = 2,-- The police grade required to ban someone from getting a weapon license
+    LicenseUnBanRank = 2, -- The police grade required to unban someone from getting a weapon license
+    LicensePrice = 100000, -- amount = to dollars how much it will cost when buying a weapon license
+    LicenseitemPrice = 10000, -- amount = to dollars / this is for buying the license item if you have lost it or just need a new copy of it
+    LicenseReceive = true, -- If set true when you buy a weapon license you will get the weapon license item
+    WeaponLicenseItemName = "weaponlicense" -- the item name of your weapon license default should be ("weaponlicense")
+}
+
+Config.Metadata = {
+    Granted = 'glicensestatus',
+    Banned = 'blicensestatus'
+}
 
 Config.SelfCheck = true -- If set true players can check with /weaponbanned and it will tell you if you are banned or not also you can do /weapongranted and it will tell you if you are granted to have weapon license or not
 
 Config.RequiredItem = true -- If set true they must bring an item when buying a weapon license to prove who they are
-Config.RequiredItemName = "id_card" -- The item name of your idencation item default should be (id_card)
-
-Config.WeaponLicenseItemName = "weaponlicense" -- the item name of your weapon license default should be (weaponlicense)
+Config.RequiredItemName = "id_card" -- The item name of your idencation item default should be ("id_card")
 
 Config.PedSettings = {
     label = "Buy Weapon license",
@@ -83,7 +91,8 @@ Config.Lang = {
     ['you_are_not'] = 'You are not banned from getting a firearm license. Head down to one of your nearest gun stores to buy a firearm license',
     ['you_are_granted'] = 'You are granted to get a firearm license. Head down to one of your nearest gun stores to buy a firearm license',
     ['you_are_not_granted'] = 'You are not granted to get a firearm license. Talk to an officer about being granted permission',
-    ['rank_not_high'] = 'You are not a high enough rank to use this command'
+    ['rank_not_high'] = 'You are not a high enough rank to use this command',
+    ['id_verified'] = 'Your ID has been verified'
 }
     function Notificationcl(titletext, msgtext, type)
         if Config.NotifyType == "qb" then

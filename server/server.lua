@@ -2,10 +2,10 @@ RegisterServerEvent('c-buylicense:server:givelicense', function()
     local src = source
     local Player = QBCore.Functions.GetPlayer(src)
         local licenseTable = Player.PlayerData.metadata["licences"]
-        if Config.MoneyType == "Bank" then
+        if Config.MoneyType == "Bank" or Config.MoneyType == 'Bank' then
             if Player.PlayerData.money.bank >= Config.LicensePrice then
          Player.Functions.RemoveMoney(Config.MoneyType, Config.LicensePrice)
-         licenseTable['weapon'] = true
+         licenseTable[Config.WeaponMetadataName] = true
          Player.Functions.SetMetaData('licences', licenseTable)
         if Config.LicenseReceive == true then
             local info = {}
@@ -23,10 +23,10 @@ RegisterServerEvent('c-buylicense:server:givelicense', function()
     else
         Notificationsv(src, {Config.Lang['header_text']}, Config.Lang['you_no_money'], 'error')
     end
-    elseif Config.MoneyType == "Cash" then
+    elseif Config.MoneyType == "Cash" or Config.MoneyType == 'Cash' then
         if Player.PlayerData.money.cash >= Config.LicensePrice then
             Player.Functions.RemoveMoney(Config.MoneyType, Config.LicensePrice)
-            licenseTable['weapon'] = true
+            licenseTable[Config.WeaponMetadataName] = true
             Player.Functions.SetMetaData('licences', licenseTable)
            if Config.LicenseReceive == true then
                local info = {}
@@ -50,7 +50,7 @@ end)
 RegisterServerEvent('c-buylicense:server:givelicenseitem', function()
     local src = source
     local Player = QBCore.Functions.GetPlayer(src)
-    if Config.MoneyType == "Bank" then
+    if Config.MoneyType == "Bank" or Config.MoneyType == 'Bank' then
         if Player.PlayerData.money.bank >= Config.LicenseitemPrice then
             Player.Functions.RemoveMoney(Config.MoneyType, Config.LicenseitemPrice)
             local info = {}
@@ -63,10 +63,11 @@ RegisterServerEvent('c-buylicense:server:givelicenseitem', function()
             elseif Config.Inventory == "ox" then
                 exports.ox_inventory:AddItem(src, Config.WeaponLicenseItemName, 1, info)
           end
+            Notificationsv(src, {Config.Lang['header_text']}, Config.Lang['you_have_money2'], 'error')
         else
             Notificationsv(src, {Config.Lang['header_text']}, Config.Lang['you_no_money2'], 'error')
          end
-    elseif Config.MoneyType == "Cash" then
+    elseif Config.MoneyType == "Cash" or Config.MoneyType == 'Cash' then
         if Player.PlayerData.money.cash >= Config.LicenseitemPrice then
             Player.Functions.RemoveMoney(Config.MoneyType, Config.LicenseitemPrice)
             local info = {}
@@ -78,9 +79,10 @@ RegisterServerEvent('c-buylicense:server:givelicenseitem', function()
                     TriggerClientEvent('inventory:client:ItemBox', src, QBCore.Shared.Items[Config.WeaponLicenseItemName], 'add')
                 elseif Config.Inventory == "ox" then
                     exports.ox_inventory:AddItem(src, Config.WeaponLicenseItemName, 1, info)
-              end
-                else
-                    Notificationsv(src, {Config.Lang['header_text']}, Config.Lang['you_no_money2'], 'error')
+                 end
+                 Notificationsv(src, {Config.Lang['header_text']}, Config.Lang['you_have_money2'], 'error')
+             else
+                 Notificationsv(src, {Config.Lang['header_text']}, Config.Lang['you_no_money2'], 'error')
               end
            end
        end)
@@ -88,7 +90,7 @@ RegisterServerEvent('c-buylicense:server:givelicenseitem', function()
 QBCore.Functions.CreateCallback('c-buylicense:server:bancheckstatus', function(source, cb)
     local src = source
     local Player = QBCore.Functions.GetPlayer(src)
-    local bancheck = Player.PlayerData.metadata['licensebanned']
+    local bancheck = Player.PlayerData.metadata[Config.Metadata.Banned]
 
     if bancheck then
         cb(true)
@@ -100,7 +102,7 @@ end)
 QBCore.Functions.CreateCallback('c-buylicense:server:grantedcheckstatus', function(source, cb)
     local src = source
     local Player = QBCore.Functions.GetPlayer(src)
-    local grantedcheck = Player.PlayerData.metadata['grantedlicense']
+    local grantedcheck = Player.PlayerData.metadata[Config.Metadata.Granted]
 
     if grantedcheck then
         cb(true)

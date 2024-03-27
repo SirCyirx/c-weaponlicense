@@ -1,8 +1,7 @@
 # C-Buylicense
 [Discord](https://discord.gg/YvThXdz59G)
 
-
-# Preview Updated
+# Preview OLD
 [Video](https://streamable.com/r0r9gk)
 # Feature
 - New way to buy a weapon license
@@ -19,10 +18,10 @@
 3. Put The Folder In Your Resources Folder.
 4. use this path [qb]/qb-core/server/player.lua and put this line any where in between line 111 - 138
 ```lua
-PlayerData.metadata['licensebanned'] = PlayerData.metadata['licensebanned'] or false
+PlayerData.metadata['blicensestatus'] = PlayerData.metadata['blicensestatus'] or false
 ```
 ```lua
-PlayerData.metadata['grantedlicense'] = PlayerData.metadata['grantedlicense'] or false
+PlayerData.metadata['glicensestatus'] = PlayerData.metadata['glicensestatus'] or false
 ```
 5. Restart Your Server.
 
@@ -31,8 +30,6 @@ PlayerData.metadata['grantedlicense'] = PlayerData.metadata['grantedlicense'] or
 2. [qb-inventory](https://github.com/qbcore-framework/qb-inventory/releases/tag/v1) or [lj-inventory](https://github.com/loljoshie/lj-inventory/releases/tag/1.2) or [ox_inventory](https://github.com/overextended/ox_inventory)
 3. [ox_lib](https://github.com/overextended/ox_lib/releases) 
 4. [qb-target](https://github.com/qbcore-framework/qb-target) or [ox_target](https://github.com/overextended/ox_target)
-
-
 
 
 Put this into your cfg in this in order
