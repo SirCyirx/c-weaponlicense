@@ -1,4 +1,4 @@
-RegisterServerEvent('c-buylicense:server:givelicense', function()
+RegisterServerEvent('c-weaponlicense:server:givelicense', function()
     local src = source
     local Player = QBCore.Functions.GetPlayer(src)
         local licenseTable = Player.PlayerData.metadata["licences"]
@@ -47,7 +47,7 @@ RegisterServerEvent('c-buylicense:server:givelicense', function()
 end
 end)
 
-RegisterServerEvent('c-buylicense:server:givelicenseitem', function()
+RegisterServerEvent('c-weaponlicense:server:givelicenseitem', function()
     local src = source
     local Player = QBCore.Functions.GetPlayer(src)
     if Config.MoneyType == "Bank" or Config.MoneyType == 'Bank' then
@@ -87,7 +87,7 @@ RegisterServerEvent('c-buylicense:server:givelicenseitem', function()
            end
        end)
 
-QBCore.Functions.CreateCallback('c-buylicense:server:bancheckstatus', function(source, cb)
+QBCore.Functions.CreateCallback('c-weaponlicense:server:bancheckstatus', function(source, cb)
     local src = source
     local Player = QBCore.Functions.GetPlayer(src)
     local bancheck = Player.PlayerData.metadata[Config.Metadata.Banned]
@@ -99,7 +99,7 @@ QBCore.Functions.CreateCallback('c-buylicense:server:bancheckstatus', function(s
     end
 end)
 
-QBCore.Functions.CreateCallback('c-buylicense:server:grantedcheckstatus', function(source, cb)
+QBCore.Functions.CreateCallback('c-weaponlicense:server:grantedcheckstatus', function(source, cb)
     local src = source
     local Player = QBCore.Functions.GetPlayer(src)
     local grantedcheck = Player.PlayerData.metadata[Config.Metadata.Granted]
@@ -111,7 +111,7 @@ QBCore.Functions.CreateCallback('c-buylicense:server:grantedcheckstatus', functi
     end
 end)
 
-QBCore.Functions.CreateCallback('c-buylicense:server:licensecheckstatus', function(source, cb)
+QBCore.Functions.CreateCallback('c-weaponlicense:server:licensecheckstatus', function(source, cb)
     local src = source
     local Player = QBCore.Functions.GetPlayer(src)
     local licenseTable = Player.PlayerData.metadata["licences"]

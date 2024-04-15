@@ -1,4 +1,4 @@
-RegisterNetEvent('c-buylicense:client:start', function()
+RegisterNetEvent('c-weaponlicense:client:start', function()
   TriggerEvent('animations:client:EmoteCommandStart', {"idle"})
   QBCore.Functions.Progressbar('gunstorebuy', Config.Lang['progressbar_text'], 2500, false, true, {
       disableMovement = true,
@@ -11,9 +11,9 @@ RegisterNetEvent('c-buylicense:client:start', function()
         local hasidqb = QBCore.Functions.HasItem(Config.RequiredItemName, 1)
         if hasidqb == true then
           if Config.LicenseBan == true then
-            TriggerEvent('c-buylicense:client:bancheck')
+            TriggerEvent('c-weaponlicense:client:bancheck')
             elseif Config.LicenseBan == false then
-              TriggerEvent('c-buylicense:client:licensecheck')
+              TriggerEvent('c-weaponlicense:client:licensecheck')
             end
         else
           Notificationcl({Config.Lang['header_text']}, Config.Lang['no_id_card'], 'error')
@@ -22,9 +22,9 @@ RegisterNetEvent('c-buylicense:client:start', function()
             local hasidlj = exports['lj-inventory']:HasItem(Config.RequiredItemName, 1)
            if hasidlj == true then
             if Config.LicenseBan == true then
-            TriggerEvent('c-buylicense:client:bancheck')
+            TriggerEvent('c-weaponlicense:client:bancheck')
             elseif Config.LicenseBan == false then
-              TriggerEvent('c-buylicense:client:licensecheck')
+              TriggerEvent('c-weaponlicense:client:licensecheck')
             end
           else
             Notificationcl({Config.Lang['header_text']}, Config.Lang['no_id_card'], 'error')
@@ -32,9 +32,9 @@ RegisterNetEvent('c-buylicense:client:start', function()
         elseif Config.Inventory == "ox" then
           if exports.ox_inventory:GetItem(source, Config.RequiredItemName, nil, false) then
            if Config.LicenseBan == true then
-           TriggerEvent('c-buylicense:client:bancheck')
+           TriggerEvent('c-weaponlicense:client:bancheck')
            elseif Config.LicenseBan == false then
-             TriggerEvent('c-buylicense:client:licensecheck')
+             TriggerEvent('c-weaponlicense:client:licensecheck')
            end
           else
            Notificationcl({Config.Lang['header_text']}, Config.Lang['no_id_card'], 'error')
@@ -42,9 +42,9 @@ RegisterNetEvent('c-buylicense:client:start', function()
           end
         elseif Config.RequiredItem == false then
           if Config.LicenseBan == true then
-            TriggerEvent('c-buylicense:client:bancheck')
+            TriggerEvent('c-weaponlicense:client:bancheck')
             elseif Config.LicenseBan == false then
-              TriggerEvent('c-buylicense:client:licensecheck')
+              TriggerEvent('c-weaponlicense:client:licensecheck')
             end
         end
 end, function()
@@ -53,13 +53,13 @@ end, function()
           end)
       end)
 
-    RegisterNetEvent('c-buylicense:client:bancheck', function()
-      QBCore.Functions.TriggerCallback("c-buylicense:server:bancheckstatus", function(banned)
+    RegisterNetEvent('c-weaponlicense:client:bancheck', function()
+      QBCore.Functions.TriggerCallback("c-weaponlicense:server:bancheckstatus", function(banned)
           if banned == false then
             if Config.UseGrant == true then
-            TriggerEvent('c-buylicense:client:grantedcheck')
+            TriggerEvent('c-weaponlicense:client:grantedcheck')
             elseif Config.UseGrant == false then
-              TriggerEvent('c-buylicense:client:licensecheck')
+              TriggerEvent('c-weaponlicense:client:licensecheck')
             end
           else
             Notificationcl({Config.Lang['header_text']}, Config.Lang['firearm_banned'], 'error')
@@ -67,27 +67,27 @@ end, function()
         end)
     end)
 
-      RegisterNetEvent('c-buylicense:client:grantedcheck', function()
-        QBCore.Functions.TriggerCallback("c-buylicense:server:grantedcheckstatus", function(granted)
+      RegisterNetEvent('c-weaponlicense:client:grantedcheck', function()
+        QBCore.Functions.TriggerCallback("c-weaponlicense:server:grantedcheckstatus", function(granted)
             if granted == true then
-              TriggerEvent('c-buylicense:client:licensecheck')
+              TriggerEvent('c-weaponlicense:client:licensecheck')
             else
               Notificationcl({Config.Lang['header_text']}, Config.Lang['granted_false'], 'error')
             end
         end)
     end)
 
-    RegisterNetEvent('c-buylicense:client:licensecheck', function()
-          QBCore.Functions.TriggerCallback("c-buylicense:server:licensecheckstatus", function(hasLicense)
+    RegisterNetEvent('c-weaponlicense:client:licensecheck', function()
+          QBCore.Functions.TriggerCallback("c-weaponlicense:server:licensecheckstatus", function(hasLicense)
               if hasLicense == false then
-                TriggerEvent('c-buylicense:start2')
+                TriggerEvent('c-weaponlicense:start2')
               else
                 Notificationcl({Config.Lang['header_text']}, Config.Lang['you_have_already'], 'error')
             end
         end)
     end)
 
-RegisterNetEvent('c-buylicense:start2', function()
+RegisterNetEvent('c-weaponlicense:start2', function()
 Notificationcl({Config.Lang['header_text']}, Config.Lang['has_id_card'], 'inform')
       local alert = lib.alertDialog({
             header = Config.ContextMenu.header,
@@ -96,14 +96,14 @@ Notificationcl({Config.Lang['header_text']}, Config.Lang['has_id_card'], 'inform
             cancel = true
         })
         if alert == "confirm" then
-          TriggerServerEvent("c-buylicense:server:givelicense")
+          TriggerServerEvent("c-weaponlicense:server:givelicense")
           TriggerEvent('animations:client:EmoteCommandStart', {"c"})
         elseif alert == "cancel" then
           Notificationcl({Config.Lang['header_text']}, Config.Lang['canceled'], 'error')
          end
      end)
 
-    RegisterNetEvent('c-buylicense:client:itemstart', function()
+    RegisterNetEvent('c-weaponlicense:client:itemstart', function()
       TriggerEvent('animations:client:EmoteCommandStart', {"idle"})
       QBCore.Functions.Progressbar('gunstorebuyitem', Config.Lang['progressbar_text'], 2500, false, true, {
           disableMovement = true,
@@ -115,7 +115,7 @@ Notificationcl({Config.Lang['header_text']}, Config.Lang['has_id_card'], 'inform
         if Config.Inventory == "qb" then
             local hasidqb = QBCore.Functions.HasItem(Config.RequiredItemName, 1)
             if hasidqb == true then
-              TriggerEvent('c-buylicense:client:licensecheck2')
+              TriggerEvent('c-weaponlicense:client:licensecheck2')
             else
               Notificationcl({Config.Lang['header_text']}, Config.Lang['no_id_card'], 'error')
                 end
@@ -123,18 +123,18 @@ Notificationcl({Config.Lang['header_text']}, Config.Lang['has_id_card'], 'inform
             elseif Config.Inventory == "lj" then
                 local hasidlj = exports['lj-inventory']:HasItem(Config.RequiredItemName, 1)
                if hasidlj == true then
-                TriggerEvent('c-buylicense:client:licensecheck2')
+                TriggerEvent('c-weaponlicense:client:licensecheck2')
               else
                 Notificationcl({Config.Lang['header_text']}, Config.Lang['no_id_card'], 'error')
                   end
         elseif Config.Inventory == "ox" then
           if exports.ox_inventory:GetItem(source, Config.RequiredItemName, nil, false) then
-             TriggerEvent('c-buylicense:client:licensecheck2')
+             TriggerEvent('c-weaponlicense:client:licensecheck2')
           else
              Notificationcl({Config.Lang['header_text']}, Config.Lang['no_id_card'], 'error')
              end
             elseif Config.RequiredItem == false then
-                TriggerEvent('c-buylicense:client:licensecheck2')
+                TriggerEvent('c-weaponlicense:client:licensecheck2')
             end
     end, function()
               TriggerEvent('animations:client:EmoteCommandStart', {"c"})
@@ -142,11 +142,11 @@ Notificationcl({Config.Lang['header_text']}, Config.Lang['has_id_card'], 'inform
               end)
           end)
 
-        RegisterNetEvent('c-buylicense:client:licensecheck2', function()
-          QBCore.Functions.TriggerCallback("c-buylicense:server:licensecheckstatus", function(hasLicense)
+        RegisterNetEvent('c-weaponlicense:client:licensecheck2', function()
+          QBCore.Functions.TriggerCallback("c-weaponlicense:server:licensecheckstatus", function(hasLicense)
             if hasLicense == true then
                Notificationcl({Config.Lang['header_text']}, Config.Lang['id_verified'], 'error')
-               TriggerServerEvent('c-buylicense:server:givelicenseitem')
+               TriggerServerEvent('c-weaponlicense:server:givelicenseitem')
            else
                Notificationcl({Config.Lang['header_text']}, Config.Lang['you_dont_have'], 'error')
             end
@@ -161,19 +161,19 @@ Notificationcl({Config.Lang['header_text']}, Config.Lang['has_id_card'], 'inform
                   type = 'client',
                   icon = Config.PedSettings.icon,
                   label = Config.PedSettings.label,
-                  event = 'c-buylicense:client:start',
+                  event = 'c-weaponlicense:client:start',
           },{
                     type = 'client',
                     icon = Config.PedSettings.iconitem,
                     label = Config.PedSettings.labelitem,
-                    event = 'c-buylicense:client:itemstart',
+                    event = 'c-weaponlicense:client:itemstart',
                   },
                 },
                 distance = 2.5
           })
             elseif Config.Target == "ox" then
-              exports.ox_target:addModel(Config.PedSettings.Model, {label = Config.PedSettings.label, icon = Config.PedSettings.icon, event = 'c-buylicense:client:start'})
-              exports.ox_target:addModel(Config.PedSettings.Model, {label = Config.PedSettings.labelitem, icon = Config.PedSettings.iconitem, event = 'c-buylicense:client:itemstart'})
+              exports.ox_target:addModel(Config.PedSettings.Model, {label = Config.PedSettings.label, icon = Config.PedSettings.icon, event = 'c-weaponlicense:client:start'})
+              exports.ox_target:addModel(Config.PedSettings.Model, {label = Config.PedSettings.labelitem, icon = Config.PedSettings.iconitem, event = 'c-weaponlicense:client:itemstart'})
             end
         end)
 

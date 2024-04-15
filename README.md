@@ -1,4 +1,4 @@
-# C-Buylicense
+# C-WeaponLicense
 [Discord](https://discord.gg/YvThXdz59G)
 
 # Preview OLD
@@ -13,8 +13,8 @@
 - Open Source
 
 # Installation
-1. Download From [github](https://github.com/SirCyirx/C-BuyLicense)
-2. Rename The Folder From c-buylicense-main to c-buylicense.
+1. Download From [github](https://github.com/SirCyirx/C-WeaponLicense)
+2. Rename The Folder From c-weaponlicense-main to c-weaponlicense.
 3. Put The Folder In Your Resources Folder.
 4. use this path [qb]/qb-core/server/player.lua and put this line any where in between line 111 - 138
 ```lua
@@ -38,7 +38,7 @@ ensure ox_lib
 ensure qb-core
 ensure qb-inventory or lj-inventory or ox_inventory
 ensure qb-target or ox_target
-ensure c-buylicense
+ensure c-weaponlicense
 ```
 
 # Commands

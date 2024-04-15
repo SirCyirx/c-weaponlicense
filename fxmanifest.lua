@@ -1,7 +1,7 @@
 fx_version 'cerulean'
 game 'gta5'
 author 'SirCyrix'
-description 'C-Buylicense, A new way to buy a weapon license and the weapon license item'
+description 'c-weaponlicense, A new way to buy a weapon license and the weapon license item'
 version '1.3'
 
 shared_scripts {
