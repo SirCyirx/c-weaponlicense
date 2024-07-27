@@ -10,9 +10,9 @@ QBCore.Functions.Progressbar('gunstorebuy', Config.Lang['progressbar_text'], 250
   if Config.Inventory == "qb" then
     local HasItem = QBCore.Functions.HasItem(Config.RequiredItemName, 1)
   if HasItem == true then
-  if Config.LicenseBan == true then
+  if Config.LicenseSettings.LicenseBan == true then
        TriggerEvent('c-weaponlicense:client:bancheck')
-  elseif Config.LicenseBan == false then
+  elseif Config.LicenseSettings.LicenseBan == false then
        TriggerEvent('c-weaponlicense:client:licensecheck')
    end else
        Notificationcl({Config.Lang['header_text']}, Config.Lang['no_id_card'], 'error')
@@ -20,9 +20,9 @@ QBCore.Functions.Progressbar('gunstorebuy', Config.Lang['progressbar_text'], 250
   elseif Config.Inventory == "lj" then
     local HasItem = exports['lj-inventory']:HasItem(Config.RequiredItemName, 1)
   if HasItem == true then
-  if Config.LicenseBan == true then
+  if Config.LicenseSettings.LicenseBan == true then
        TriggerEvent('c-weaponlicense:client:bancheck')
-  elseif Config.LicenseBan == false then
+  elseif Config.LicenseSettings.LicenseBan == false then
        TriggerEvent('c-weaponlicense:client:licensecheck')
    end else
        Notificationcl({Config.Lang['header_text']}, Config.Lang['no_id_card'], 'error')
@@ -30,18 +30,18 @@ QBCore.Functions.Progressbar('gunstorebuy', Config.Lang['progressbar_text'], 250
   elseif Config.Inventory == "ox" then
     local HasItem exports.ox_inventory:GetItemCount(source, Config.RequiredItemName, nil, false)
   if HasItem >= 1 then
-  if Config.LicenseBan == true then
+  if Config.LicenseSettings.LicenseBan == true then
        TriggerEvent('c-weaponlicense:client:bancheck')
-  elseif Config.LicenseBan == false then
+  elseif Config.LicenseSettings.LicenseBan == false then
        TriggerEvent('c-weaponlicense:client:licensecheck')
    end else
        Notificationcl({Config.Lang['header_text']}, Config.Lang['no_id_card'], 'error')
        end
     end
   elseif Config.RequiredItem == false then
-  if Config.LicenseBan == true then
+  if Config.LicenseSettings.LicenseBan == true then
        TriggerEvent('c-weaponlicense:client:bancheck')
-  elseif Config.LicenseBan == false then
+  elseif Config.LicenseSettings.LicenseBan == false then
        TriggerEvent('c-weaponlicense:client:licensecheck')
        end
     end
@@ -54,9 +54,9 @@ end)
 RegisterNetEvent('c-weaponlicense:client:bancheck', function()
 QBCore.Functions.TriggerCallback("c-weaponlicense:server:bancheckstatus", function(banned)
   if banned == false then
-  if Config.UseGrant == true then
+  if Config.GrantSettings.UseGrant == true then
        TriggerEvent('c-weaponlicense:client:grantedcheck')
-  elseif Config.UseGrant == false then
+  elseif Config.GrantSettings.UseGrant == false then
        TriggerEvent('c-weaponlicense:client:licensecheck')
    end else
        Notificationcl({Config.Lang['header_text']}, Config.Lang['firearm_banned'], 'error')
@@ -88,7 +88,7 @@ RegisterNetEvent('c-weaponlicense:start2', function()
        Notificationcl({Config.Lang['header_text']}, Config.Lang['has_id_card'], 'inform')
     local alert = lib.alertDialog({
             header = Config.ContextMenu.header,
-            content = Config.ContextMenu.text..Config.LicensePrice..'?',
+            content = Config.ContextMenu.text..Config.LicenseSettings.LicensePrice..'?',
             centered = true,
             cancel = true
         })

@@ -3,20 +3,20 @@ RegisterServerEvent('c-weaponlicense:server:givelicense', function()
     local Player = QBCore.Functions.GetPlayer(src)
         local licenseTable = Player.PlayerData.metadata["licences"]
         if Config.MoneyType == "Bank" or Config.MoneyType == 'Bank' then
-            if Player.PlayerData.money.bank >= Config.LicensePrice then
-         Player.Functions.RemoveMoney(Config.MoneyType, Config.LicensePrice)
+            if Player.PlayerData.money.bank >= Config.LicenseSettings.LicensePrice then
+         Player.Functions.RemoveMoney(Config.MoneyType, Config.LicenseSettings.LicensePrice)
          licenseTable[Config.WeaponMetadataName] = true
          Player.Functions.SetMetaData('licences', licenseTable)
-        if Config.LicenseReceive == true then
+        if Config.LicenseSettings.LicenseReceive == true then
             local info = {}
                 info.firstname = Player.PlayerData.charinfo.firstname
                 info.lastname = Player.PlayerData.charinfo.lastname
                 info.birthdate = Player.PlayerData.charinfo.birthdate
         if Config.Inventory == "qb" or Config.Inventory == "lj" then
-            Player.Functions.AddItem(Config.WeaponLicenseItemName, 1, nil, info)
-            TriggerClientEvent('inventory:client:ItemBox', src, QBCore.Shared.Items[Config.WeaponLicenseItemName], 'add')
+            Player.Functions.AddItem(Config.LicenseSettings.WeaponLicenseItemName, 1, nil, info)
+            TriggerClientEvent('inventory:client:ItemBox', src, QBCore.Shared.Items[Config.LicenseSettings.WeaponLicenseItemName], 'add')
         elseif Config.Inventory == "ox" then
-            exports.ox_inventory:AddItem(src, Config.WeaponLicenseItemName, 1, info)
+            exports.ox_inventory:AddItem(src, Config.LicenseSettings.WeaponLicenseItemName, 1, info)
         end
     end
         Notificationsv(src, {Config.Lang['header_text']}, Config.Lang['you_have_money'], 'success')
@@ -24,20 +24,20 @@ RegisterServerEvent('c-weaponlicense:server:givelicense', function()
         Notificationsv(src, {Config.Lang['header_text']}, Config.Lang['you_no_money'], 'error')
     end
     elseif Config.MoneyType == "Cash" or Config.MoneyType == 'Cash' then
-        if Player.PlayerData.money.cash >= Config.LicensePrice then
-            Player.Functions.RemoveMoney(Config.MoneyType, Config.LicensePrice)
+        if Player.PlayerData.money.cash >= Config.LicenseSettings.LicensePrice then
+            Player.Functions.RemoveMoney(Config.MoneyType, Config.LicenseSettings.LicensePrice)
             licenseTable[Config.WeaponMetadataName] = true
             Player.Functions.SetMetaData('licences', licenseTable)
-           if Config.LicenseReceive == true then
+           if Config.LicenseSettings.LicenseReceive == true then
                local info = {}
                    info.firstname = Player.PlayerData.charinfo.firstname
                    info.lastname = Player.PlayerData.charinfo.lastname
                    info.birthdate = Player.PlayerData.charinfo.birthdate
            if Config.Inventory == "qb" or Config.Inventory == "lj" then
-               Player.Functions.AddItem(Config.WeaponLicenseItemName, 1, nil, info)
-               TriggerClientEvent('inventory:client:ItemBox', src, QBCore.Shared.Items[Config.WeaponLicenseItemName], 'add')
+               Player.Functions.AddItem(Config.LicenseSettings.WeaponLicenseItemName, 1, nil, info)
+               TriggerClientEvent('inventory:client:ItemBox', src, QBCore.Shared.Items[Config.LicenseSettings.WeaponLicenseItemName], 'add')
            elseif Config.Inventory == "ox" then
-               exports.ox_inventory:AddItem(src, Config.WeaponLicenseItemName, 1, info)
+               exports.ox_inventory:AddItem(src, Config.LicenseSettings.WeaponLicenseItemName, 1, info)
             end
         end
         Notificationsv(src, {Config.Lang['header_text']}, Config.Lang['you_have_money'], 'success')
@@ -51,34 +51,34 @@ RegisterServerEvent('c-weaponlicense:server:givelicenseitem', function()
     local src = source
     local Player = QBCore.Functions.GetPlayer(src)
     if Config.MoneyType == "Bank" or Config.MoneyType == 'Bank' then
-        if Player.PlayerData.money.bank >= Config.LicenseitemPrice then
-            Player.Functions.RemoveMoney(Config.MoneyType, Config.LicenseitemPrice)
+        if Player.PlayerData.money.bank >= Config.LicenseSettings.LicenseitemPrice then
+            Player.Functions.RemoveMoney(Config.MoneyType, Config.LicenseSettings.LicenseitemPrice)
             local info = {}
             info.firstname = Player.PlayerData.charinfo.firstname
             info.lastname = Player.PlayerData.charinfo.lastname
             info.birthdate = Player.PlayerData.charinfo.birthdate
             if Config.Inventory == "qb" or Config.Inventory == "lj" then
-                Player.Functions.AddItem(Config.WeaponLicenseItemName, 1, nil, info)
-                TriggerClientEvent('inventory:client:ItemBox', src, QBCore.Shared.Items[Config.WeaponLicenseItemName], 'add')
+                Player.Functions.AddItem(Config.LicenseSettings.WeaponLicenseItemName, 1, nil, info)
+                TriggerClientEvent('inventory:client:ItemBox', src, QBCore.Shared.Items[Config.LicenseSettings.WeaponLicenseItemName], 'add')
             elseif Config.Inventory == "ox" then
-                exports.ox_inventory:AddItem(src, Config.WeaponLicenseItemName, 1, info)
+                exports.ox_inventory:AddItem(src, Config.LicenseSettings.WeaponLicenseItemName, 1, info)
           end
             Notificationsv(src, {Config.Lang['header_text']}, Config.Lang['you_have_money2'], 'error')
         else
             Notificationsv(src, {Config.Lang['header_text']}, Config.Lang['you_no_money2'], 'error')
          end
     elseif Config.MoneyType == "Cash" or Config.MoneyType == 'Cash' then
-        if Player.PlayerData.money.cash >= Config.LicenseitemPrice then
-            Player.Functions.RemoveMoney(Config.MoneyType, Config.LicenseitemPrice)
+        if Player.PlayerData.money.cash >= Config.LicenseSettings.LicenseitemPrice then
+            Player.Functions.RemoveMoney(Config.MoneyType, Config.LicenseSettings.LicenseitemPrice)
             local info = {}
                 info.firstname = Player.PlayerData.charinfo.firstname
                 info.lastname = Player.PlayerData.charinfo.lastname
                 info.birthdate = Player.PlayerData.charinfo.birthdate
                 if Config.Inventory == "qb" or Config.Inventory == "lj" then
-                    Player.Functions.AddItem(Config.WeaponLicenseItemName, 1, nil, info)
-                    TriggerClientEvent('inventory:client:ItemBox', src, QBCore.Shared.Items[Config.WeaponLicenseItemName], 'add')
+                    Player.Functions.AddItem(Config.LicenseSettings.WeaponLicenseItemName, 1, nil, info)
+                    TriggerClientEvent('inventory:client:ItemBox', src, QBCore.Shared.Items[Config.LicenseSettings.WeaponLicenseItemName], 'add')
                 elseif Config.Inventory == "ox" then
-                    exports.ox_inventory:AddItem(src, Config.WeaponLicenseItemName, 1, info)
+                    exports.ox_inventory:AddItem(src, Config.LicenseSettings.WeaponLicenseItemName, 1, info)
                  end
                  Notificationsv(src, {Config.Lang['header_text']}, Config.Lang['you_have_money2'], 'error')
              else
@@ -123,15 +123,15 @@ QBCore.Functions.CreateCallback('c-weaponlicense:server:licensecheckstatus', fun
     end
 end)
 
-if Config.LicenseBan == true then
+if Config.LicenseSettings.LicenseBan == true then
 QBCore.Commands.Add('weaponban', "Ban or unban someone from getting a Weapon License", { { name = 'id', help = "Id of player you want to ban or unban" }, { name = 'ban or unban', help = "banning someone will result in them not being able to get a firearm license & unbanning someone will result in them being able to get a firearm license" } }, true, function(source, args)
         local src = source
         local Player = QBCore.Functions.GetPlayer(src)
         local SearchedPlayer = QBCore.Functions.GetPlayer(tonumber(args[1]))
         local licenseTable = SearchedPlayer.PlayerData.metadata['licences']
         if args[2] == "ban" or args[2] == "Ban" or args[2] == "BAN" then
-        if Player.PlayerData.job.type == 'leo' and Player.PlayerData.job.grade.level >= Config.LicenseBanRank then
-            if Config.RemoveLicense == true then
+        if Player.PlayerData.job.type == 'leo' and Player.PlayerData.job.grade.level >= Config.LicenseSettings.LicenseBanRank then
+            if Config.LicenseSettings.RemoveLicense == true then
                 licenseTable.weapon = false
                 SearchedPlayer.Functions.SetMetaData('licences', licenseTable) 
              end
@@ -142,7 +142,7 @@ QBCore.Commands.Add('weaponban', "Ban or unban someone from getting a Weapon Lic
                            Notificationsv(src, {Config.Lang['header_text']}, Config.Lang['rank_not_high'], 'error')
                         end
                 elseif args[2] == "unban" or args[2] == "Unban" or args[2] == "UNBAN" then
-                    if Player.PlayerData.job.type == 'leo' and Player.PlayerData.job.grade.level >= Config.LicenseUnBanRank then
+                    if Player.PlayerData.job.type == 'leo' and Player.PlayerData.job.grade.level >= Config.LicenseSettings.LicenseUnBanRank then
                         SearchedPlayer.Functions.SetMetaData('licensebanned', false)
                            Notificationsv(SearchedPlayer.PlayerData.source, {Config.Lang['header_text']}, Config.Lang['you_get_unbanned'])
                            Notificationsv(src, {Config.Lang['header_text']}, Config.Lang['you_just_unbanned'], 'error')
@@ -153,13 +153,13 @@ QBCore.Commands.Add('weaponban', "Ban or unban someone from getting a Weapon Lic
                  end)
               end
 
-if Config.UseGrant == true then
+if Config.GrantSettings.UseGrant == true then
     QBCore.Commands.Add('weapongrant', "Grant or ungrant someone the option of being able to get a firearm license", { { name = 'id', help = "Id of player you want to grant or ungrant"}, {  name = 'grant or ungrant', help = "Granting will result in them not being able to get a firearm license & Ungranting will result in them being able to get a firearm license" } }, true, function(source, args)
         local src = source
         local Player = QBCore.Functions.GetPlayer(src)
         local SearchedPlayer = QBCore.Functions.GetPlayer(tonumber(args[1])) 
         if args[2] == "grant" then
-        if Player.PlayerData.job.type == 'leo' and Player.PlayerData.job.grade.level >= Config.GrantRank then
+        if Player.PlayerData.job.type == 'leo' and Player.PlayerData.job.grade.level >= Config.GrantSettings.GrantRank then
                 SearchedPlayer.Functions.SetMetaData('grantedlicense', true)
                            Notificationsv(SearchedPlayer.PlayerData.source, {Config.Lang['header_text']}, Config.Lang['you_get_granted'], 'error')
                            Notificationsv(src, {Config.Lang['header_text']}, Config.Lang['you_just_granted'], 'success')
@@ -167,7 +167,7 @@ if Config.UseGrant == true then
                            Notificationsv(src, {Config.Lang['header_text']}, Config.Lang['rank_not_high'], 'error')
                         end
                 elseif args[2] == "ungrant" then
-                    if Player.PlayerData.job.type == 'leo' and Player.PlayerData.job.grade.level >= Config.UnGrantRank then
+                    if Player.PlayerData.job.type == 'leo' and Player.PlayerData.job.grade.level >= Config.GrantSettings.UnGrantRank then
                     SearchedPlayer.Functions.SetMetaData('grantedlicense', false)
                            Notificationsv(SearchedPlayer.PlayerData.source, {Config.Lang['header_text']}, Config.Lang['you_get_ungranted'], 'inform')
                            Notificationsv(src, {Config.Lang['header_text']}, Config.Lang['you_just_ungranted'], 'success')
@@ -178,7 +178,7 @@ if Config.UseGrant == true then
                   end)
                end
 
-    if Config.LicenseBan == true then
+    if Config.LicenseSettings.LicenseBan == true then
     if Config.SelfCheck == true then
         QBCore.Commands.Add('weaponbanned', "Check if your banned from getting a firearm license", {}, true, function(source)
                 local src = source
@@ -193,7 +193,7 @@ if Config.UseGrant == true then
              end
           end
 
-    if Config.UseGrant == true then
+    if Config.GrantSettings.UseGrant == true then
         if Config.SelfCheck == true then
             QBCore.Commands.Add('weapongranted', "Check if you have been to get a firearm license", {}, true, function(source)
                     local src = source
